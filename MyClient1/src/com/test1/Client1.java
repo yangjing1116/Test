@@ -7,75 +7,46 @@ package com.test1;
 
 import java.net.*;
 import java.io.*;
-import javax.swing.*;
-import java.awt.event.*;
 
-public class Client1 extends JFrame implements ActionListener{
-    //声明组件
-    JTextArea jta = null;
-    JScrollPane jsp = null;
-    JTextField jtf = null;
-    JButton jb = null;
-    JPanel jp = null;
-
-    PrintWriter pw = null;
-
-
-    public static void main(String[] args) {
-        Client1 mc1 = new Client1();
+public class Client1{
+    public static void main(String[] args){
+        Client1 c1 = new Client1();
     }
 
     //构造函数
-    public Client1() {
-        //定义组件
-        jta = new JTextArea();
-        jsp = new JScrollPane(jta);
-        jtf = new JTextField(20);
-        jb = new JButton("发送");
-        jb.addActionListener(this);
-        jp = new JPanel();
-
-        //添加
-        jp.add(jtf);
-        jp.add(jb);
-
-        this.add(jsp, "Center");
-        this.add(jp, "South");
-
-        //显示
-        this.setSize(400, 300);
-        this.setTitle("客户端");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
-
-        try {
-            //创建客户端对象，请求连接某个服务器
+    public Client1(){
+        try{
+            //创建客户端对象,连接到某个服务器
             Socket s = new Socket("127.0.0.1", 9999);
-            InputStreamReader isr = new InputStreamReader(s.getInputStream());
+
+            //接收从控制台输入的信息
+            InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(isr);
-            pw = new PrintWriter(s.getOutputStream(), true);
 
-            //不停地读取从服务器发来的信息
-            while(true) {
+            PrintWriter pw = new PrintWriter(s.getOutputStream(), true);
+
+            InputStreamReader isr2 = new InputStreamReader(s.getInputStream());
+            BufferedReader br2 = new BufferedReader(isr2);
+
+            while(true){
+                System.out.println("输入你想对服务器说的话：");
+                //客户端先从控制台接收
                 String info = br.readLine();
-                jta.append("服务器 对 客户端说："+ info + "\r\n");
+                //再把它发送给服务器
+                pw.println(info);
+                //根据对话内容判断是否结束对话
+                if(info.equals("bye")){
+                    System.out.println("对话结束！");
+                    s.close();
+                    break;
+                }
+
+                //接收从服务器端发来的信息
+                String res = br2.readLine();
+                System.out.println("服务器说："+res);
             }
-        } catch(Exception e) {
+        }catch(Exception e){
             e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent arg0) {
-        // TODO 自动生成的方法存根
-        if (arg0.getSource() == jb) {
-            String info = jtf.getText();
-            //把客户端发送的信息显示到jta
-            jta.append("客户端 对 服务器说："+ info + "\r\n");
-
-            pw.println(info);
         }
     }
 }
-
