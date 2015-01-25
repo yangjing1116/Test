@@ -30,7 +30,7 @@ public class Client1 extends JFrame implements ActionListener{
         //定义组件
         jta = new JTextArea();
         jsp = new JScrollPane(jta);
-        jtf = new JTextField(10);
+        jtf = new JTextField(20);
         jb = new JButton("发送");
         jb.addActionListener(this);
         jp = new JPanel();
@@ -43,8 +43,8 @@ public class Client1 extends JFrame implements ActionListener{
         this.add(jp, "South");
 
         //显示
-        this.setSize(300, 200);
-        this.setTitle("QQ聊天 客户端");
+        this.setSize(400, 300);
+        this.setTitle("客户端");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
 
