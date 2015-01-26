@@ -1,3 +1,6 @@
+/**
+ *客户端，可以新增服务器连接
+ */
 package com.test1;
 
 /**
@@ -15,13 +18,20 @@ public class Client1{
 
     //构造函数
     public Client1(){
-        try{
-            //创建客户端对象,连接到某个服务器
-            Socket s = new Socket("127.0.0.1", 9999);
 
+
+        try{
             //接收从控制台输入的信息
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(isr);
+
+            System.out.println("输入你要连接到的服务器的IP地址：");
+            String serverAddress = br.readLine();
+            System.out.println("输入你要连接到的服务器的端口号：");
+            int serverPort = Integer.parseInt(br.readLine());
+
+            //创建客户端对象,连接到某个服务器
+            Socket s = new Socket(serverAddress, serverPort);
 
             PrintWriter pw = new PrintWriter(s.getOutputStream(), true);
 
@@ -36,6 +46,7 @@ public class Client1{
                 pw.println(info);
                 //根据对话内容判断是否结束对话
                 if(info.equals("bye")){
+
                     System.out.println("对话结束！");
                     s.close();
                     break;
