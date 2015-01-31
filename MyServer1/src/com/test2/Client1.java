@@ -1,7 +1,7 @@
 /**
  *客户端，可以新增服务器连接
  */
-package com.test1;
+package com.test2;
 /**
  * @author yangjing
  * @since 1.0.0
@@ -9,7 +9,7 @@ package com.test1;
 import java.net.*;
 import java.io.*;
 
-public class Client1{
+public class Client1 {
     public static void main(String[] args){
         Client1 c1 = new Client1();
     }
@@ -19,8 +19,7 @@ public class Client1{
         Socket s = null;
         try{
             //接收从控制台输入的信息
-            InputStreamReader isr = new InputStreamReader(System.in);
-            BufferedReader br = new BufferedReader(isr);
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
             System.out.println("输入你要连接到的服务器的IP地址：");
             String serverAddress = br.readLine();
@@ -32,8 +31,7 @@ public class Client1{
 
             PrintWriter pw = new PrintWriter(s.getOutputStream(), true);
 
-            InputStreamReader isr2 = new InputStreamReader(s.getInputStream());
-            BufferedReader br2 = new BufferedReader(isr2);
+            BufferedReader br2 = new BufferedReader(new InputStreamReader(s.getInputStream()));
 
             while(true){
                 System.out.println("输入你想对服务器说的话：");
