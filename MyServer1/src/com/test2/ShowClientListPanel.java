@@ -18,7 +18,7 @@ public class ShowClientListPanel extends JPanel implements ActionListener {
     public void drawCloseButton() {
         for (int i = 0; i < new ClientListManage().getArrayListSize(); i++) {
             //创建按钮
-            JButton jb = new JButton();
+            JButton jb = new JButton("关闭");
             System.out.println();
             //注册监听
             jb.setActionCommand("closeClientList");
