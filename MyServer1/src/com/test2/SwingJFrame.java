@@ -1,62 +1,41 @@
 /**
- * SwingJFrame类:Swing面板：
- * borderLayout:
- * （1）north:panel(两个按钮："客户端列表"+"关闭")
- * （2）center:显示panel（初始化为"空"）(JTextField)
- * 给两个JButton加上时间监听
+ * SwingJFrame类:
+ * MyPanel类：
+ * North:JLabel：客户端列表
+ * Center:显示每一个客户端列表信息和相应的关闭按钮（即：创建ShowClientListPanel对象）
  *
  */
 package com.test2;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 /**
  * @author yangjing
  * @since 1.0.0
  */
-public class SwingJFrame extends JFrame implements ActionListener{
-    //声明组件
-    JPanel jp1 = null;
-    JButton jb1 = null;   //客户端列表
-    JButton jb2 = null;   //关闭
-    JTextField jtf = null;   //显示列表
+public class SwingJFrame extends JFrame {
+
+    //客户端列表
+    JLabel jl = null;
+    ShowClientListPanel mp = null;
 
     //构造方法
-    public SwingJFrame() {
+    public SwingJFrame(){
         //定义组件
-        jp1 = new JPanel();
-        jb1 = new JButton("客户端列表");
-
-        jb2 = new JButton("关闭");
-        //注册监听
-        jb2.setActionCommand("closeClientList");
-        jb2.addActionListener(this);
-
-        jtf = new JTextField();
-        jtf.setText(new ClientListManage().showList());
-
+        jl = new JLabel("客户端列表");
+        mp = new ShowClientListPanel();
 
         //添加
-        jp1.add(jb1);
-        jp1.add(jb2);
-        this.add(jp1,BorderLayout.NORTH);
-        this.add(jtf);
+        this.add(jl, BorderLayout.NORTH);
+        this.add(mp, BorderLayout.CENTER);
 
-       //显示
+        //显示
         this.setSize(400,200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        //关闭连接
-        if(e.getActionCommand().equals("closeClientList")){
-            jtf.setText("");
-        }
-    }
-
 }
+
+

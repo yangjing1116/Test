@@ -7,14 +7,14 @@
  * 2.ClientMember类:客户端成员类：
  * 成员属性：IP,port
  * 成员方法：*规定显示格式:(IP:port)
- * 3.SwingJFrame类:Swing面板：
- *   borderLayout:
- * （1）north:panel(两个按钮："客户端列表"+"关闭")
- * （2）center:显示panel（初始化为"空"）(JTextField)
- * 给两个JButton加上时间监听
- * 4.Server类：服务器端
- * 5.Client1类：客户端1
- * 6.Client2类：客户端2
+ * 3.Server类：服务器端
+ * 4.Client1类：客户端1
+ * 5.Client2类：客户端2
+ * 6.SwingJFrame类:
+ * North:JLabel：客户端列表
+ * Center:显示每一个客户端列表信息和相应的关闭按钮（即：创建ShowClientListPanel对象）
+ * 7.ShowClientListPanel类：显示每一个客户端列表信息和相应的关闭按钮
+ *
  */
 package com.test2;
 
@@ -42,8 +42,10 @@ public class Server {
         try {
             //创建SocketServer对象
             ServerSocket serverSocket = new ServerSocket(9999);
-            new SwingJFrame();
+
             System.out.println("服务器在9999端口启动。。。。。。");
+            //服务器启动后，就显示"客户端列表"面板
+            new SwingJFrame();
 
             socket = serverSocket.accept();
 
@@ -100,7 +102,6 @@ public class Server {
             }
         }
     }
-
 
 
     //建立和客户端的连接

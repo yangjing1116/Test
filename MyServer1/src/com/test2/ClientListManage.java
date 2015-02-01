@@ -21,6 +21,11 @@ public class ClientListManage {
         al = new ArrayList<ClientMember>();
     }
 
+    //返回al.size()
+    public int getArrayListSize(){
+        return al.size();
+    }
+
     //showList():
     public String showList(){
         //遍历列表并显示
